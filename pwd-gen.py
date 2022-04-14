@@ -12,7 +12,6 @@ parser.add_argument("-l", "--length", help="Set password length", type=int, meta
 
 if len(sys.argv)==1:
     parser.print_help()
-    parser.exit()
 
 args = parser.parse_args()
 
