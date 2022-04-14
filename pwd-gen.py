@@ -9,8 +9,12 @@ parser = argparse.ArgumentParser(description='Simple password generator in Pytho
 parser.add_argument("-s", "--symbol", help="Include Symbols. (e.g. @#$%%)", action="store_true")
 parser.add_argument("-i", "--include", help="Include Similar Characters (e.g. i, l, 1, L, o, 0, O)", action="store_true")
 parser.add_argument("-l", "--length", help="Set password length", type=int, metavar=m)
+
+if len(sys.argv)==1:
+    parser.print_help()
+    parser.exit()
+
 args = parser.parse_args()
-parser.print_help()
 
 
 DEFAULT_LEN = 14
