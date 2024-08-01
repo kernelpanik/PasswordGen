@@ -1,21 +1,28 @@
 import random
 import array
 import argparse
+import sys
 
 formatter = lambda prog: argparse.HelpFormatter(prog,max_help_position=52)
 parser = argparse.ArgumentParser(formatter_class=formatter)
 m = 'N'
+n = 'NUM'
 parser = argparse.ArgumentParser(description='Simple password generator in Python')
-parser.add_argument("-s", "--symbol", help="Include Symbols. (e.g. @#$%%)", action="store_true")
+parser.add_argument("-s", "--symbol", help="Include symbols: @#$=:?./|~>*()<%%", action="store_true")
 parser.add_argument("-i", "--include", help="Include Similar Characters (e.g. i, l, 1, L, o, 0, O)", action="store_true")
 parser.add_argument("-l", "--length", help="Set password length", type=int, metavar=m)
+parser.add_argument("-n", "--number", help="Number of password to generate ", type=int, metavar=n)
+
 
 if len(sys.argv)==1:
     parser.print_help()
+    print(f"\n")
+    sys.exit(1)
+
 
 args = parser.parse_args()
 
-
+NUMBER = 1
 DEFAULT_LEN = 14
 DIGITS = ['2', '3', '4', '5', '6', '7', '8', '9']
 LOCASE_CHARACTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
@@ -41,7 +48,7 @@ def create_pwd():
     password = ""
     for x in temp_pass_list:
         password = password + x
-    print(f"\nNew password is: {password}\n")
+    print(f"{password}")
 
 if args.length:
     DEFAULT_LEN = args.length
@@ -56,4 +63,8 @@ if args.include:
     LOCASE_CHARACTERS += ["i", "l", "o"]
     UPCASE_CHARACTERS += ["L", "O"]
 
-create_pwd()
+if args.number:
+    NUMBER = args.number
+
+for _ in range(NUMBER):
+    create_pwd()
